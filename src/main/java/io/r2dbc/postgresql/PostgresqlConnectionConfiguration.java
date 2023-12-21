@@ -780,7 +780,6 @@ public final class PostgresqlConnectionConfiguration {
          */
         public Builder loadBalanceHosts(boolean loadBalanceHosts) {
             this.loadBalanceHosts = loadBalanceHosts;
-            prepareMultiHostConfiguration().loadBalanceHosts(loadBalanceHosts);
             return this;
         }
 
