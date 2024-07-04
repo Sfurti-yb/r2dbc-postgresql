@@ -142,6 +142,42 @@ public final class PostgresqlConnectionConfiguration {
     private final String topologyKeys;
     private final int ybServersRefreshInterval;
 
+    // Copy constructor
+    public PostgresqlConnectionConfiguration(PostgresqlConnectionConfiguration config) {
+        this.applicationName = config.applicationName;
+        this.autodetectExtensions = config.autodetectExtensions;
+        this.channelBindingMode = config.channelBindingMode;
+        this.compatibilityMode = config.compatibilityMode;
+        this.connectTimeout = config.connectTimeout;
+        this.database = config.database;
+        this.errorResponseLogLevel = config.errorResponseLogLevel;
+        this.exceptionLogLevel = config.exceptionLogLevel;
+        this.extensions = config.extensions;
+        this.fetchSize = config.fetchSize;
+        this.forceBinary = config.forceBinary;
+        this.lockWaitTimeout = config.lockWaitTimeout;
+        this.loopResources = config.loopResources;
+        this.maxMessageSize = config.maxMessageSize;
+        this.multiHostConfiguration = config.multiHostConfiguration;
+        this.noticeLogLevel = config.noticeLogLevel;
+        this.options = new LinkedHashMap<>(config.options);
+        this.statementTimeout = config.statementTimeout;
+        this.password = config.password;
+        this.preferAttachedBuffers = config.preferAttachedBuffers;
+        this.preparedStatementCacheQueries = config.preparedStatementCacheQueries;
+        this.singleHostConfiguration = config.singleHostConfiguration;
+        this.sslConfig = config.sslConfig;
+        this.tcpKeepAlive = config.tcpKeepAlive;
+        this.tcpNoDelay = config.tcpNoDelay;
+        this.timeZone = config.timeZone;
+        this.username = config.username;
+        
+        // YugabyteDB Specific
+        this.loadBalanceHosts = config.loadBalanceHosts;
+        this.topologyKeys = config.topologyKeys;
+        this.ybServersRefreshInterval = config.ybServersRefreshInterval;
+    }
+
     private PostgresqlConnectionConfiguration(String applicationName, boolean autodetectExtensions, ChannelBindingMode channelBindingMode, boolean compatibilityMode, @Nullable Duration connectTimeout,
                                               @Nullable String database, LogLevel errorResponseLogLevel, List<Extension> extensions, @Nullable Function<Throwable, LogLevel> exceptionLogLevel,
                                               ToIntFunction<String> fetchSize, boolean forceBinary, @Nullable Duration lockWaitTimeout, @Nullable LoopResources loopResources, int maxMessageSize,
@@ -1276,7 +1312,7 @@ public final class PostgresqlConnectionConfiguration {
          * @throws IllegalArgumentException if {@code ybServersRefreshInterval} is {@code null}
          */
         public Builder ybServersRefreshInterval(int refreshinterval) {
-            this.ybServersRefreshInterval = Assert.requireNonNull(refreshinterval, "username must not be null");
+            this.ybServersRefreshInterval = Assert.requireNonNull(refreshinterval, "refreshinterval must not be null");
             return this;
         }
 
